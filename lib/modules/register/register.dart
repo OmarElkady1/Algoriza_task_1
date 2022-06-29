@@ -1,5 +1,6 @@
-import 'package:algoriza_task_1/my_button.dart';
-import 'package:algoriza_task_1/my_form_field.dart';
+import 'package:algoriza_task_1/shared/my_button.dart';
+import 'package:algoriza_task_1/shared/my_form_field.dart';
+import 'package:algoriza_task_1/shared/my_text_button.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 
@@ -48,8 +49,8 @@ class Register extends StatelessWidget {
                             color:Colors.black,
                           ),
                         ),
-                        Spacer(),
-                        TextButton(onPressed: (){}, child: const Text('Help')),
+                        const Spacer(),
+                        MyTextButton(onPressed: (){}, text: 'Help'),
                         const Icon(Icons.help_outlined,color: Colors.blue,),
 
                       ],
@@ -66,17 +67,10 @@ class Register extends StatelessWidget {
                   const SizedBox(
                     height: 30,
                   ),
-                  Stack(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 100,right: 10),
-                        child: MYFormField(controller: phoneController, textInputType:TextInputType.phone , label: 'Phone Number',isPassword: false,),
-                      ),
-                      Container(
-                        alignment: Alignment.centerLeft,
-                        // width: 100,
-                        // height: 100,
-                        child: CountryCodePicker(
+                  Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: MYFormField(controller: phoneController, textInputType:TextInputType.phone , label: 'Phone Number',
+                        isPassword: false,prefix:CountryCodePicker(
                           onChanged: print,
                           // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
                           initialSelection: 'Eg',
@@ -87,17 +81,14 @@ class Register extends StatelessWidget {
                           showOnlyCountryWhenClosed: false,
                           // optional. aligns the flag and the Text left
                           alignLeft: false,
-                        ),
-                      ),
-
-                    ],
-                  ),
+                        ),) ),
                   const SizedBox(
                     height: 30,
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: MYFormField(suffix: Icons.visibility_outlined,controller: passController, textInputType:TextInputType.visiblePassword , label: 'Password',isPassword: true,),
+                    child: MYFormField(suffix: Icons.visibility_outlined,controller: passController, textInputType:TextInputType.visiblePassword ,
+                      label: 'Password',isPassword: true,),
                   ),
                   const SizedBox(
                     height: 15,
@@ -156,10 +147,9 @@ class Register extends StatelessWidget {
                         const Text(
                           'Has any account?',
                         ),
-                        TextButton(onPressed: (){
+                        MyTextButton(onPressed: (){
                           Navigator.push(context, MaterialPageRoute(builder: (context)=>Login()));
-
-                        }, child: const Text('Sing in here')),
+                        }, text: 'Sing in here'),
                         const Spacer()
                       ],
                     ),

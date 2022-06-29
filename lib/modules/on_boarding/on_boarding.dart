@@ -1,6 +1,8 @@
 import 'package:algoriza_task_1/modules/login/login.dart';
 import 'package:algoriza_task_1/modules/register/register.dart';
-import 'package:algoriza_task_1/my_button.dart';
+import 'package:algoriza_task_1/shared/my_button.dart';
+import 'package:algoriza_task_1/shared/my_outline_button.dart';
+import 'package:algoriza_task_1/shared/my_text_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -50,104 +52,87 @@ class _OnBoardingState extends State<OnBoarding> {
         actions: [
           Padding(
             padding: const EdgeInsets.all(10.0),
-            child: OutlinedButton(
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.black12),
-                  shape: MaterialStateProperty.all(
-                    RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
-                  ),
-                ),
-                onPressed: () {
-                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder:(context)=>   Login()), (route) => false);
-                },
-                child: const Text(
-                  'Skip',
-                  style: TextStyle(
-                    color: Colors.black,
-                  ),
-                )),
-          )
+            child: MyOutlineButton(backgroundColor:HexColor('#FFFDF6F0') , radius: 20, onPressed: (){
+              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder:(context)=>   Login()), (route) => false);
+            },
+                text: 'Skip', textBackground: Colors.black,)
+          ),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(30.0),
-        child: Column(
-          children: [
-            Image.asset(
-              'assets/images/7krave.PNG',
-              width: double.infinity,
-            ),
-            Expanded(
-              child: PageView.builder(
-                itemBuilder: (context, index) =>
-                    buildBoardingItem(boardingList[index]),
-                itemCount: boardingList.length,
-                controller: boardingController,
-                physics: const BouncingScrollPhysics(),
-                onPageChanged: (int v) {
-                  if (v == boardingList.length - 1) {
-                    setState(() {
-                      isLast = true;
-                    });
-                  } else {
-                    setState(() {
-                      isLast = false;
-                    });
-                  }
-                },
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5),
-              child: SmoothPageIndicator(
-                controller: boardingController,
-                count: boardingList.length,
-                effect: const ExpandingDotsEffect(
-                  dotColor: Colors.grey,
-                  activeDotColor: Colors.amber,
-                  dotWidth: 10,
-                  dotHeight: 8,
-                  spacing: 5,
-                  expansionFactor: 4,
-                ),
-              ),
-            ),
-
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: MyButton(
-                text: 'Login',
-                onTap: () {
-                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder:(context)=>   Login()), (route) => false);
-                },
-                radius: 10,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(30.0),
+          child: Column(
+            children: [
+              Image.asset(
+                'assets/images/7.png',
                 width: double.infinity,
-                background: HexColor('#FF51AFAB'),
-                height: 50,
+                height: 35,
               ),
-            ),
-            Row(
-              children: [
-                Spacer(),
-                const Text(
-                  'Don\'t have an account?',
+              Expanded(
+                child: PageView.builder(
+                  itemBuilder: (context, index) =>
+                      buildBoardingItem(boardingList[index]),
+                  itemCount: boardingList.length,
+                  controller: boardingController,
+                  physics: const BouncingScrollPhysics(),
+                  onPageChanged: (int v) {
+                    if (v == boardingList.length - 1) {
+                      setState(() {
+                        isLast = true;
+                      });
+                    } else {
+                      setState(() {
+                        isLast = false;
+                      });
+                    }
+                  },
                 ),
-                TextButton(
-                    onPressed: () {
-                      Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(builder: (context) => Register()),
-                          (route) => false);
-                    },
-                    child: Text(
-                      'Sin Up',
-                      style: TextStyle(color: HexColor('#FF51AFAB')),
-                    )),
-                const Spacer()
-              ],
-            ),
-          ],
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 5),
+                child: SmoothPageIndicator(
+                  controller: boardingController,
+                  count: boardingList.length,
+                  effect: const ExpandingDotsEffect(
+                    dotColor: Colors.grey,
+                    activeDotColor: Colors.amber,
+                    dotWidth: 10,
+                    dotHeight: 8,
+                    spacing: 5,
+                    expansionFactor: 4,
+                  ),
+                ),
+              ),
+
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: MyButton(
+                  text: 'Login',
+                  onTap: () {
+                    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder:(context)=>   Login()), (route) => false);
+                  },
+                  radius: 10,
+                  width: double.infinity,
+                  background: HexColor('#FF51AFAB'),
+                  height: 50,
+                ),
+              ),
+              Row(
+                children: [
+                  const Spacer(),
+                  const Text(
+                    'Don\'t have an account?',
+                  ),
+                  MyTextButton(onPressed: (){ Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => Register()),
+                          (route) => false);}, text:'Sin Up',textColor: HexColor('#FF51AFAB') ,),
+                  const Spacer()
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

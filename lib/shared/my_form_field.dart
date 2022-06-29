@@ -17,7 +17,7 @@ class MYFormField extends StatelessWidget {
   String label;
   bool? isClickable = true;
   bool? isPassword = false;
-   IconData? prefix;
+   Widget? prefix;
   IconData? suffix;
   VoidCallback? suffixPressed;
 
@@ -37,7 +37,8 @@ class MYFormField extends StatelessWidget {
         decoration: InputDecoration(
         labelText: label,
        suffix: Icon(suffix),
-        prefix: Icon(prefix),
+        prefix: prefix,
+
 
 
 
