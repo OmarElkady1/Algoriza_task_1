@@ -1,8 +1,9 @@
-import 'package:algoriza_task_1/modules/login/login.dart';
-import 'package:algoriza_task_1/modules/on_boarding/on_boarding.dart';
-import 'package:algoriza_task_1/modules/register/register.dart';
+
+import 'package:algoriza_task_1/features/presentation/on_boarding/on_boarding.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+import 'features/presentation/counter/counter.dart';
 
 void main() {
   runApp(const MyApp());
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         scaffoldBackgroundColor: Colors.white,
       ),
-      home:  OnBoarding(),
+      home:  Counter(),
     );
   }
 }

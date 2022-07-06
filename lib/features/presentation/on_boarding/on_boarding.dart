@@ -1,13 +1,14 @@
-import 'package:algoriza_task_1/modules/login/login.dart';
-import 'package:algoriza_task_1/modules/register/register.dart';
-import 'package:algoriza_task_1/shared/my_button.dart';
-import 'package:algoriza_task_1/shared/my_outline_button.dart';
-import 'package:algoriza_task_1/shared/my_text_button.dart';
+import 'package:algoriza_task_1/features/presentation/login/login.dart';
+import 'package:algoriza_task_1/features/presentation/on_boarding/widgets/login_button.dart';
+import 'package:algoriza_task_1/features/presentation/on_boarding/widgets/skip_button.dart';
+import 'package:algoriza_task_1/features/presentation/register/register.dart';
+import 'package:algoriza_task_1/core/util/widgets/my_button.dart';
+import 'package:algoriza_task_1/core/util/widgets/my_outline_button.dart';
+import 'package:algoriza_task_1/core/util/widgets/my_text_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
 
 class BoardingModel {
   String image;
@@ -32,16 +33,18 @@ class _OnBoardingState extends State<OnBoarding> {
     BoardingModel(
         image: 'assets/images/on_boarding1.png',
         title: 'Get food delivery to your doorstep',
-        body: 'We have young and professional delivery team that will bring your food as soon as possible to doorstep '
-    ),
+        body:
+            'We have young and professional delivery team that will bring your food as soon as possible to doorstep '),
     BoardingModel(
         image: 'assets/images/on_boarding2.png',
         title: 'Buy Any food from your favorite restaurant',
-        body: 'we are constantly adding your favourite restaurant throughout the territory and around your area carefully selected '),
+        body:
+            'we are constantly adding your favourite restaurant throughout the territory and around your area carefully selected '),
     BoardingModel(
         image: 'assets/images/on_boarding3.png',
         title: 'Get food delivery to your doorstep',
-        body: 'We have young and professional delivery team that will bring your food as soon as possible to doorstep '),
+        body:
+            'We have young and professional delivery team that will bring your food as soon as possible to doorstep '),
   ];
 
   @override
@@ -49,14 +52,8 @@ class _OnBoardingState extends State<OnBoarding> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: MyOutlineButton(backgroundColor:HexColor('#FFFDF6F0') , radius: 20, onPressed: (){
-              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder:(context)=>   Login()), (route) => false);
-            },
-                text: 'Skip', textBackground: Colors.black,)
-          ),
+        actions: const [
+          SkipButton(),
         ],
       ),
       body: SafeArea(
@@ -104,30 +101,23 @@ class _OnBoardingState extends State<OnBoarding> {
                   ),
                 ),
               ),
-
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: MyButton(
-                  text: 'Login',
-                  onTap: () {
-                    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder:(context)=>   Login()), (route) => false);
-                  },
-                  radius: 10,
-                  width: double.infinity,
-                  background: HexColor('#FF51AFAB'),
-                  height: 50,
-                ),
-              ),
+              const LoginButton(),
               Row(
                 children: [
                   const Spacer(),
                   const Text(
                     'Don\'t have an account?',
                   ),
-                  MyTextButton(onPressed: (){ Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(builder: (context) => Register()),
-                          (route) => false);}, text:'Sin Up',textColor: HexColor('#FF51AFAB') ,),
+                  MyTextButton(
+                    onPressed: () {
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(builder: (context) => Register()),
+                          (route) => false);
+                    },
+                    text: 'Sin Up',
+                    textColor: HexColor('#FF51AFAB'),
+                  ),
                   const Spacer()
                 ],
               ),
@@ -138,23 +128,26 @@ class _OnBoardingState extends State<OnBoarding> {
     );
   }
 
-  Widget buildBoardingItem(BoardingModel model) => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Image.asset(model.image),
-
-          Text(
-
-            model.title,
-            style:
-                const TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0,),
-          ),
-
-          Text(
-            model.body,
-            style: const TextStyle(overflow: TextOverflow.ellipsis,
-                fontWeight: FontWeight.normal, fontSize: 10.0),
-          ),
-        ],
+  Widget buildBoardingItem(BoardingModel model) => SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Image.asset(model.image),
+            Text(
+              model.title,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20.0,
+              ),
+            ),
+            Text(
+              model.body,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                  fontWeight: FontWeight.normal, fontSize: 10.0),
+            ),
+          ],
+        ),
       );
 }
